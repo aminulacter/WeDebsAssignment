@@ -1,0 +1,42 @@
+//users table
+
+CREATE TABLE `wedev`.`users` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `role` TINYINT(1) UNSIGNED NOT NULL,
+  `name` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`));
+  
+  
+  //products table
+  CREATE TABLE `wedev`.`products` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(100) NOT NULL,
+  `SKU` VARCHAR(100) NOT NULL,
+  `Description` TEXT(500) NULL,
+  `Category_id` INT UNSIGNED NOT NULL,
+  `Price` INT UNSIGNED NOT NULL,
+  `Image` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `SKU_UNIQUE` (`SKU` ASC) VISIBLE);
+  
+  
+  // categories table
+  REATE TABLE `wedev`.`categories` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `categoryName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `categoryName_UNIQUE` (`categoryName` ASC) VISIBLE);
+  
+  //alter user
+  ALTER TABLE `wedev`.`users` 
+CHANGE COLUMN `role` `role` ENUM('Admin', 'Customer') NOT NULL ;
+
+//orders table
+CREATE TABLE `wedev`.`orders` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` INT UNSIGNED NOT NULL,
+  `product_id` INT UNSIGNED NOT NULL,
+  `status` ENUM('Processing', 'Shipped', 'Delivered') NOT NULL,
+  PRIMARY KEY (`id`));
